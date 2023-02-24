@@ -7,11 +7,11 @@ class LayoutExercisesUserScreen extends StatelessWidget {
 
   List<Widget> _buildScreens() {
     return [
-      const Profile(),
       const WorkOutScreen(),
       ProductScreen(),
       Container(color: Colors.brown),
       Container(color: Colors.yellow),
+      const Profile(),
     ];
   }
 
