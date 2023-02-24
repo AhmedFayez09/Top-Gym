@@ -1,5 +1,6 @@
 import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:image_cropper/image_cropper.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:top_gym/core/config/routes/app.dart';
 
@@ -10,7 +11,6 @@ class ProfileUserCubit extends Cubit<ProfileUserState> {
 
   static ProfileUserCubit get(context) => BlocProvider.of(context);
 
-  // String lang = AppStrings.englishCode;
   bool lang = CacheHelper.getBoolean(key: MyCacheKeys.local);
 
   void onChangeValue(bool local) {
@@ -22,39 +22,19 @@ class ProfileUserCubit extends Cubit<ProfileUserState> {
     emit(TrueValueState());
   }
 
-  // Future<String?> getSavedLang() async {
-  //   CacheHelper.containsKey(MyCacheKeys.local)
-  //       ? CacheHelper.getString(key: MyCacheKeys.local)
-  //       : MyCacheKeys.en;
-  //   return null;
-  // }
-  //
-  // Future<bool?> changeLang({required String langCode}) async =>
-  //     await CacheHelper.putString(
-  //       key: MyCacheKeys.local,
-  //       value: langCode,
-  //     );
-
   ///////////////////////////////////////////////////////User Details/////////////////////////////////////////////////////////////////////////
   String userName = '';
   String userImg = '';
   String userEmail = '';
 
   void initUserDetails() {
-    FirebaseAuth.instance.authStateChanges().listen((userData) {
-      if (userData != null) {
-        userName = userData.displayName ?? '';
-        userImg = userData.photoURL ?? '';
-        userEmail = userData.email ?? '';
+    FirebaseAuth.instance.authStateChanges().listen((user) {
+      if (user != null) {
+        userName = user.displayName ?? '';
+        userImg = user.photoURL ?? '';
+        userEmail = user.email ?? '';
       }
     });
-    // userName = profileData!.displayName ?? 'Loading...';
-    // (profileData != null ? profileData!.displayName : "Loading...") ??
-    //     '';
-    // userImg = profileData!.photoURL ?? 'Loading...';
-    // (profileData != null ? profileData!.photoURL : "Loading...") ?? '';
-    // userEmail = profileData!.email ?? 'Loading...';
-    // (profileData != null ? profileData!.email : "Loading...") ?? '';
   }
 
   ////////////////////////////////////////get user data from fireStore///////////////////////////////////////
@@ -72,6 +52,9 @@ class ProfileUserCubit extends Cubit<ProfileUserState> {
   //   log('all Data => ////////////////////////////////////////*********************');
   //   print(allData);
   // }
+  void nameUpdateInMainScreen({required String name}) {
+    FirebaseAuth.instance.currentUser!.updateDisplayName(name);
+  }
 
   UserData? userData;
 
@@ -94,143 +77,21 @@ class ProfileUserCubit extends Cubit<ProfileUserState> {
         .collection("users")
         .doc(userData!.uid)
         .update({key.name: value}).then((value) {
+      getUserProfileData();
       emit(UpdateDateSuccess());
-    }).catchError((e){
+    }).catchError((e) {
       emit(UpdateDateError());
     });
+    emit(NoUpdateDateYet());
   }
-
-//   void updateUser({
-//      String?      name,
-//      String?      phone,
-//      String?      email,
-//      String?      age,
-//      String?      country,
-//      String?      zipCode,
-//      String?      height,
-//      String?      weight,
-//      bool ?     male,
-//      bool ?     feMale,
-//      String?      isUser,
-//      String?      phoneNumber,
-//   }) {
-//     emit(UpdateUserDetailsLoadingState());
-//     UserData model = UserData(
-//       phoneNumber: phoneNumber ?? userData!.phoneNumber ?? '',
-//       imageUrl: '',
-//       name: name ?? userData!.name ?? '',
-//       uid: userData!.uid,
-//       email: email ?? userData!.email ?? '',
-//       age: age ?? userData!.age ?? '',
-//       country: country ?? userData!.country ?? '',
-//       zipCode: zipCode ?? userData!.zipCode ?? '',
-//       height: height ?? userData!.height ?? '',
-//       weight: weight ?? userData!.weight ?? '',
-//       male: male ?? userData!.male ,
-//       feMale: feMale ?? userData!.feMale ,
-//       isUser: isUser ?? userData!.isUser ?? '',
-//     );
-//     FirebaseFirestore.instance
-//         .collection("users")
-//         .doc(userData!.uid)
-//         .update(model.toMap())
-//         .then((value) {
-//           getUserProfileData();
-//       emit(UpdateUserDetailsSuccessState());
-//     }).catchError((e) {
-//       emit(UpdateUserDetailsErrorState());
-//     });
-//   }
-
-  // void updateUser({
-  //   required String name,
-  //   required String phone,
-  //   required String email,
-  //   required String bio,
-  //   String? image,
-  //   String? cover,
-  // }) {
-  // UserModel model = UserModel(
-  //   phone: phone,
-  //   name: name,
-  //   bio: bio,
-  //   email: email,
-  //   cover: cover ?? userModel?.cover,
-  //   image: image ?? userModel?.image,
-  //   uId: userModel?.uId,
-  //   isEmailVerified: false,
-  // );
-  // FirebaseFirestore.instance
-  //     .collection("users")
-  //     .doc(userData!.uid)
-  //     // .snapshots().listen((event) {  });
-  //     .update({ 'age' : ''});
-
-  //     .update(
-  //     model.toMap())
-  //     .then((value) {
-  //   getUserData();
-  // }).catchError((e) {
-  //   emit(SocialUserUpdateErrorStates());
-  // });
-  // }
-
-  // void getUserProfileData(UserData userData) {
-  //   profileData.snapshots().listen((event) {
-  //     event.docs.forEach((element) {
-  //       if (userData.uid == element.id) {
-  //         log('*******************************************');
-  //         log('$userData');
-  //         log('*******************************************');
-  //       }
-  //     });
-  //
-  //     // for (var doc in event.docs) {
-  //     //   userData = doc as UserData;
-  //     // }
-  //   });
-  // }
-
-////////////////////////////////////////////////**** theme *****////////////////////////////////////////////////////////////////////////////
-
-  // ThemeMode themeMode = ThemeMode.light;
-  //
-  // void checkAppTheme(ThemeMode theme) async{
-  //   // SharedPreferences prefs = await SharedPreferences.getInstance();
-  //
-  //   CacheHelper.putBoolean(key: MyCacheKeys.theme, value: themeMode == ThemeMode.dark ? true : false);
-  //   themeMode = theme;
-  //   // prefs.setString("theme", themeMode == ThemeMode.light ? 'light' : 'dark');
-  //   // notifyListeners();
-  //
-  // }
 
   bool isCheck = false;
 
   void changeAppCheck(bool check) async {
     emit(LightThemeState());
-
     isCheck = check;
-    print(isCheck);
-    // await ThemeCacheHelper().cacheTheme(check);
-    // bool themeCondition = await ThemeCacheHelper().getCachedTheme();
-    // if(themeCondition == false){
-    //   themeCondition = true;
-    // }else if(themeCondition == true){
-    //   themeCondition = false;
-    //
-    // }
-    // CacheHelper.putBoolean(key: MyCacheKeys.theme, value: check);
-    // print(
-    //     "/////////////////////${themeCondition}///////////////////////////");
     emit(DarkThemeState());
   }
-
-// if(CacheHelper.getBoolean(key: MyCacheKeys.theme) == false){
-// CacheHelper.putBoolean(key: MyCacheKeys.theme, value: true);
-// }else{
-// CacheHelper.putBoolean(key: MyCacheKeys.theme, value: false);
-// }
 
 // this must be initial Function when called the cubit
 //   Future<bool> authFingerPrint() async {
@@ -276,10 +137,75 @@ class ProfileUserCubit extends Cubit<ProfileUserState> {
   void changeTitleIndex(int index) {
     emit(CurrentChangeTitleIndex());
     titleIndex = index;
-    print(titleIndex);
     emit(NextChangeTitleIndex());
   }
+
+
+
+  //////////////////////upload user photo///////////////////////////////////
+  File? file;
+  String? imagePath;
+  final imageHelper = ImageHelper();
+  String? uploadedImagePath;
+  final _cloudStorage = FirebaseStorage.instance;
+
+  Future imageSelector(BuildContext context, String pickerType) async {
+    switch (pickerType) {
+      case "gallery":
+        final files = await imageHelper.pickImageFromGallery();
+        final croppedFile = await imageHelper.crop(
+          file: files!,
+          cropStyle: CropStyle.circle,
+        );
+        if (croppedFile != null) {
+          String croppedImage = croppedFile.path.toString();
+          file = File(croppedFile.path);
+          uploadedImagePath = basename(croppedFile.path);
+          emit(UploadUserImageLoading());
+          try {
+            Reference refStorage = _cloudStorage
+                .ref("${ApiPath.productsImage}/$uploadedImagePath");
+            await refStorage.putFile(file!);
+            updateDate(
+              key: UserDetails.imageUrl,
+              value: await refStorage.getDownloadURL(),
+            );
+            emit(UploadUserImageSuccess());
+          } catch (e) {
+            emit(UploadUserImageError());
+          }
+        }
+        break;
+      case "camera":
+        final files = await imageHelper.pickImageFromCamera();
+        if (files != null) {
+          file = File(files.path);
+          uploadedImagePath = basename(files.path);
+          emit(UploadUserImageLoading());
+          try {
+            Reference refStorage = _cloudStorage
+                .ref("${ApiPath.productsImage}/$uploadedImagePath");
+            await refStorage.putFile(file!);
+            updateDate(
+              key: UserDetails.imageUrl,
+              value: await refStorage.getDownloadURL(),
+            );
+            emit(UploadUserImageSuccess());
+          } catch (e) {
+            emit(UploadUserImageError());
+          }
+          break;
+        }
+    }
+  }
+
+
+
+
+
+
 }
+
 // import 'package:shared_preferences/shared_preferences.dart';
 
 class ThemeCacheHelper {
