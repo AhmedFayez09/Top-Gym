@@ -28,8 +28,9 @@ class CreateUserCubit extends Cubit<CreateUserState> {
           zipCode: GoalsDataUser.zipCode,
           height: GoalsDataUser.height,
           weight: GoalsDataUser.weight,
-          male: GoalsDataUser.male,
-          feMale: GoalsDataUser.feMale,
+          gender: GoalsDataUser.gender,
+          // male: GoalsDataUser.male,
+          // feMale: GoalsDataUser.feMale,
           isUser: GoalsDataUser.isUser);
       await dataBase.setUserData(userData);
       emit(SuccessCreateUserState(uId: userAuth.user!.uid));
@@ -50,13 +51,13 @@ class CreateUserCubit extends Cubit<CreateUserState> {
 
   Stream<User?> authStateChanges() => _firebaseAuth.authStateChanges();
 
-  Future<void> signOut() async {
-    emit(SignOutLoadingUserState());
-    try {
-      await _firebaseAuth.signOut();
-      emit(SignOutSuccessUserState());
-    } catch (e) {
-      emit(SignOutErrorUserState(e.toString()));
-    }
-  }
+  // Future<void> signOut() async {
+  //   emit(SignOutLoadingUserState());
+  //   try {
+  //     await _firebaseAuth.signOut();
+  //     emit(SignOutSuccessUserState());
+  //   } catch (e) {
+  //     emit(SignOutErrorUserState(e.toString()));
+  //   }
+  // }
 }
