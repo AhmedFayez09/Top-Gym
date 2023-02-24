@@ -156,11 +156,9 @@ class FieldUserDetails extends StatelessWidget {
                   Expanded(
                     child: TextFormModifyProfile(
                       title: 'Gender',
-                      initialValue: userData != null
-                          ? userData.male == true
-                              ? 'Male'
-                              : 'Female'
-                          : 'Loading...',
+                     initialValue:
+                          userData != null ? 
+                          userData.gender : 'Loading...',
                       onChanged: (maleValue) {
                         male = maleValue;
                       },
