@@ -5,6 +5,7 @@ class UserDetailsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return BlocBuilder<ProfileUserCubit, ProfileUserState>(
       builder: (context, state) {
         var cubit = ProfileUserCubit.get(context);
@@ -12,34 +13,41 @@ class UserDetailsWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             const ProfilePhoto(),
-            SizedBox(width: 8.w),
+            SizedBox(width: 3.w),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Text(
-                  cubit.userName == '' ? 'Loading...' : cubit.userName,
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyLarge!
-                      .copyWith(fontSize: 17.sp, fontWeight: FontWeight.w500),
+                Container(
+                  width: size.width * 0.40,
+                  padding: EdgeInsets.only(right: 1.w),
+                  child: Text(
+                    cubit.userData != null ? cubit.userData!.name : 'Loading..',
+                    overflow: TextOverflow.ellipsis,
+                    // cubit.userName == '' ? 'Loading...' : cubit.userName,
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyLarge!
+                        .copyWith(fontSize: 17.sp, fontWeight: FontWeight.w500),
+                  ),
                 ),
                 SizedBox(height: 0.5.h),
                 Text(cubit.userEmail),
                 SizedBox(height: 2.h),
-                SizedBox(
-                  height: 5.h,
-                  width: 35.w,
-                  child: MainButton(
-                    onPressed: () {
-                      Navigator.of(context, rootNavigator: true)
-                          .pushNamed(Routes.profileUserDataScreen);
-                    },
-                    text: 'Edit Profile',
-                    borderRadius: 8,
-                  ),
-                ),
               ],
+            ),
+            SizedBox(
+              height: 5.h,
+              width: 20.w,
+              child: MainButton(
+                onPressed: () {
+                  Navigator.of(context, rootNavigator: true)
+                      .pushNamed(Routes.profileUserDataScreen);
+                },
+                text: 'Edit Profile',
+                fontSizeText: 8,
+                borderRadius: 8,
+              ),
             ),
           ],
         );
