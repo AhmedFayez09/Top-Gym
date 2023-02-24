@@ -1,16 +1,15 @@
-import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:sizer/sizer.dart';
+import 'package:top_gym/core/config/routes/app.dart';
 
 flutterToast({
   required String msg,
   required Color color,
   Toast toastLength = Toast.LENGTH_SHORT,
+  ToastGravity gravity = ToastGravity.TOP,
 }) {
   return Fluttertoast.showToast(
     msg: msg,
     toastLength: toastLength,
-    gravity: ToastGravity.TOP,
+    gravity: gravity,
     timeInSecForIosWeb: 1,
     backgroundColor: color,
     textColor: Colors.white,
@@ -20,6 +19,9 @@ flutterToast({
 
 flutterSnackBar({required BuildContext context, required String msg}) {
   return ScaffoldMessenger.of(context).showSnackBar(
-    SnackBar(content: Text(msg)),
+    SnackBar(
+      content: Text(msg),
+      backgroundColor: AppColor.primaryColor,
+    ),
   );
 }
