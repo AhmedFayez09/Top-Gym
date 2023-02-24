@@ -6,7 +6,6 @@ class GoalsDataUser {
   static String zipCode = '';
   static String height = '';
   static String weight = '';
-  static bool male = false;
-  static bool feMale = false;
+  static String gender = '';
   static String isUser = AppStrings.isUser;
 }

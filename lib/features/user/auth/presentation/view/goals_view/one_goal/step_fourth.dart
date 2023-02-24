@@ -156,8 +156,8 @@ class StepFourth extends StatelessWidget {
                     borderRadius: 50,
                     onPressed: () {
                       if (cubit.validGender() == true) {
-                        GoalsDataUser.male = cubit.selectedMale;
-                        GoalsDataUser.feMale = cubit.selectedFeMale;
+                        GoalsDataUser.gender =
+                            cubit.selectedMale == true ? 'Male' : "Female";
                         if (stepFourKey.currentState!.validate()) {
                           cubitLayout.nextPageIndicator();
                           cubitLayout.pageController.nextPage(
