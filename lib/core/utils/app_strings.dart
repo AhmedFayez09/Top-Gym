@@ -9,7 +9,9 @@ class AppStrings {
   static const String aboutYou = "About You";
   static const String description =
       "we want to know more about you, follow the next steps\n to complete the information";
-  static const String appImageKey = 'app_image_kay';
+  static const String appImageKey = 'app_image_kay';///*****
+  static const String userImageProfile = 'user_image_profile';///*****
+
   static const String transactionCompete = 'Transaction Completed Successfully!';
   static const String ok = 'OK';
   static const String cancel = 'Cancel';
