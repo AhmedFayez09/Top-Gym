@@ -12,10 +12,10 @@ class ImageNetworkComponent extends StatelessWidget {
     return ClipRRect(
       borderRadius: BorderRadius.circular(50.sp),
       child: Image.network(
-        fit: BoxFit.fill,
+        fit: BoxFit.contain,
         image ?? AppNetworkImage.noPhoto,
-        cacheHeight: 15.h.toInt(),
-        cacheWidth: 35.w.toInt(),
+        // cacheHeight: 15.h.toInt(),
+        // cacheWidth: 35.w.toInt(),
         height: 12.h,
         width: 28.w,
         frameBuilder: (context, child, frame, wasSynchronouslyLoaded) {
@@ -39,9 +39,11 @@ class ImageNetworkComponent extends StatelessWidget {
           );
         },
         errorBuilder: (context, error, stackTrace) {
-          return const Text(
-            '😢',
-            style: TextStyle(fontSize: 40),
+          return const Center(
+            child: Text(
+              '😢',
+              style: TextStyle(fontSize: 40),
+            ),
           );
         },
       ),

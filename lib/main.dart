@@ -13,7 +13,8 @@ void main() async {
         BlocProvider(create: (context) => CreateUserCubit()),
         BlocProvider(create: (context) => LoginAdminCubit()),
         BlocProvider(
-          create: (context) => ProfileUserCubit()..getUserProfileData()
+          create: (context) => ProfileUserCubit()
+            ..getUserProfileData()
             // ..getSavedLang()
             ..initUserDetails(),
         ),
