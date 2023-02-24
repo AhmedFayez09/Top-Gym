@@ -3,12 +3,20 @@ import '../routes/app.dart';
 class AppThemeData {
   static const double borderRadius = 12;
   static final ThemeData lightTheme = ThemeData(
-    scaffoldBackgroundColor: AppColor.darkBackgroundColor,
+    scaffoldBackgroundColor: DarkAppColors.backgroundColor,
+    primaryColor: DarkAppColors.primaryColor,
+    primaryColorLight: AppColor.wColor,
+    appBarTheme: AppBarTheme(
+      backgroundColor: AppColor.noColor,
+      elevation: 0,
+      centerTitle: true,
+    ),
+
     textTheme: TextTheme(
-      headline6: TextStyle(
+      titleLarge: TextStyle(
         fontSize: 15.sp,
         fontWeight: FontWeight.bold,
-        color: AppColor.darkPrimaryColor,
+        color: DarkAppColors.primaryColor,
       ),
     ),
   );
@@ -21,48 +29,53 @@ class AppThemeData {
     colorScheme:
         ThemeData().colorScheme.copyWith(primary: AppColor.primaryColor),
     textTheme: TextTheme(
-      headline1: const TextStyle(
+      displayLarge: const TextStyle(
         color: AppColor.wColor,
         fontSize: 23,
         fontWeight: FontWeight.bold,
       ),
-      headline2: const TextStyle(
+      displayMedium: const TextStyle(
         color: Colors.blue,
         fontSize: 20,
       ),
       //Text Splash Screen : Word Top
-      headline3: GoogleFonts.bebasNeue(
+      displaySmall: GoogleFonts.bebasNeue(
         fontSize: 60,
         color: Colors.white,
         letterSpacing: 1.8,
       ),
       //Text Splah Screen : Word Gym
-      headline4: GoogleFonts.bebasNeue(
+      headlineMedium: GoogleFonts.bebasNeue(
         fontSize: 60,
         color: AppColor.yColor,
         letterSpacing: 1.8,
       ),
       // in welcome screen : word => About you
-      headline5: GoogleFonts.lato(
+      headlineSmall: GoogleFonts.lato(
         fontSize: 42,
         fontWeight: FontWeight.bold,
         color: Colors.white,
       ),
-      headline6: TextStyle(
+      titleLarge: TextStyle(
           fontSize: 15.sp,
           fontWeight: FontWeight.bold,
           color: AppColor.primaryColor),
 
-      caption: GoogleFonts.lato(
+      bodySmall: GoogleFonts.lato(
         fontSize: 12,
         fontWeight: FontWeight.w400,
         color: Colors.white,
       ),
-      button: TextStyle(
+      labelLarge: TextStyle(
         fontSize: 12.sp,
         color: AppColor.subTitleTextColorInGoalScreen,
       ),
     ),
+   
+   
+   
+   
+   
     appBarTheme: AppBarTheme(
       backgroundColor: AppColor.noColor,
       elevation: 0,
