@@ -20,7 +20,11 @@ class AppColor {
   static Color profileBackgroundColor = const Color(0xFFF3F3F3);
   static Color profileItemColor = const Color(0xFFFFFFFF);
 //////////////////////////////////Dark Mode//////////////////////////////////////////////////
-  static const darkBackgroundColor = Colors.white;
-  static const darkPrimaryColor = Color(0xFF5d88fd);
+  // static const darkBackgroundColor = Colors.white;
+  // static const darkPrimaryColor = Color(0xFF5d88fd);
 
+}
+class DarkAppColors{
+  static const backgroundColor = Colors.white;
+  static const primaryColor = Color(0xFF5d88fd);
 }
