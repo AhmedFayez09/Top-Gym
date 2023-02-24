@@ -8,13 +8,16 @@ class UserData {
   final String zipCode;
   final String height;
   final String weight;
-  final bool male;
-  final bool feMale;
+  final String gender;
+
+  // final bool male;
+  // final bool feMale;
   final String isUser;
   final String phoneNumber;
 
   UserData(
       {required this.phoneNumber,
+      required this.gender,
       required this.imageUrl,
       required this.name,
       required this.uid,
@@ -24,14 +27,15 @@ class UserData {
       required this.zipCode,
       required this.height,
       required this.weight,
-      required this.male,
-      required this.feMale,
+      // required this.male,
+      // required this.feMale,
       required this.isUser});
 
   factory UserData.fromMap(Map<String, dynamic> map, String documentId) {
     return UserData(
         phoneNumber: map['phoneNumber'],
         imageUrl: map['imageUrl'],
+        gender: map['gender'],
         name: map['name'],
         uid: documentId,
         email: map['email'] ?? '',
@@ -39,8 +43,8 @@ class UserData {
         country: map['country'],
         height: map['height'],
         weight: map['weight'],
-        feMale: map['feMale'],
-        male: map['male'],
+        // feMale: map['feMale'],
+        // male: map['male'],
         zipCode: map['zipCode'],
         isUser: map['isUser']);
   }
@@ -48,6 +52,7 @@ class UserData {
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'uid': uid,
+      'gender': gender,
       'phoneNumber': phoneNumber,
       'imageUrl': imageUrl,
       'name': name,
@@ -56,8 +61,8 @@ class UserData {
       'country': country,
       'height': height,
       'weight': weight,
-      'feMale': feMale,
-      'male': male,
+      // 'feMale': feMale,
+      // 'male': male,
       'zipCode': zipCode,
       'isUser': isUser,
     };
