@@ -7,5 +7,6 @@ static String clients = 'clientsData';
 
 // -------------------------  Firebase Storage ---------------------------------------------
 static String productsImage = "ProductsImage";
+static String userImage = "UserImage";
 
 }
