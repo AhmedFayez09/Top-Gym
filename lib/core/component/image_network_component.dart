@@ -1,5 +1,3 @@
-// import 'package:cached_network_image/cached_network_image.dart';
-
 import '../config/routes/app.dart';
 
 class ImageNetworkComponent extends StatelessWidget {
@@ -31,6 +29,11 @@ class ImageNetworkComponent extends StatelessWidget {
           if (loadingProgress == null) return child;
           return Center(
             child: CircularProgressIndicator(
+              // value: loadingProgress.expectedTotalBytes != null
+              //     ? loadingProgress.cumulativeBytesLoaded /
+              //         loadingProgress.expectedTotalBytes!
+              //     : null,
+
               value: loadingProgress.expectedTotalBytes != null
                   ? loadingProgress.cumulativeBytesLoaded /
                       loadingProgress.expectedTotalBytes!
@@ -46,6 +49,48 @@ class ImageNetworkComponent extends StatelessWidget {
             ),
           );
         },
+      ),
+    );
+  }
+}
+
+class CacheNetworkImageComponant extends StatelessWidget {
+  const CacheNetworkImageComponant({
+    super.key,
+    required this.image,
+    this.height = 5,
+    this.width = 5,
+  });
+  final String? image;
+  final double height;
+  final double width;
+
+  @override
+  Widget build(BuildContext context) {
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(50.sp),
+      child: CachedNetworkImage(
+        progressIndicatorBuilder: (context, url, progress) {
+          return Center(
+            child: CircularProgressIndicator(
+              value: progress.progress,
+              backgroundColor: Theme.of(context).primaryColor,
+            ),
+          );
+        },
+        imageBuilder: (context, imageProvider) => CircleAvatar(
+          radius: 50,
+          backgroundImage: imageProvider,
+        ),
+        errorWidget: (context, url, error) {
+          return const Center(
+            child: Text('😢'),
+          );
+        },
+        fit: BoxFit.contain,
+        imageUrl: image ?? AppNetworkImage.noPhoto,
+        height: height.h,
+        width: width.w,
       ),
     );
   }

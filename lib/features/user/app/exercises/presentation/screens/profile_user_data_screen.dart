@@ -22,29 +22,27 @@ class ProfileUSerDataScreen extends StatelessWidget {
           "Edit Profile",
           style: TextStyle(color: Theme.of(context).cardColor),
         ),
-      
       ),
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 3.w),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            const ProfilePhoto(
-              isButton: true,
-              radius: 80,
-            ),
-            SizedBox(height: 3.h),
-            Text(
-              'Your Information',
-              textAlign: TextAlign.start,
-              style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                    color: Theme.of(context).cardColor,
-                  ),
-            ),
-            SizedBox(height: 3.h),
-            FieldUserDetails(),
-          ],
-        ),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          const ProfilePhoto(
+            isButton: true,
+            height: 20,
+            width: 43,
+            radius: 60,
+          ),
+          SizedBox(height: 3.h),
+          Text(
+            'Your Information',
+            textAlign: TextAlign.start,
+            style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                  color: Theme.of(context).cardColor,
+                ),
+          ),
+          SizedBox(height: 3.h),
+          FieldUserDetails(),
+        ],
       ),
     );
   }

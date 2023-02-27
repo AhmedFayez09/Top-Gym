@@ -43,7 +43,7 @@ export 'package:top_gym/features/user/app/exercises/presentation/widgets/profile
 export 'package:top_gym/features/user/app/exercises/presentation/screens/workout_screen/build_muscle.dart';
 export 'package:top_gym/features/user/app/exercises/presentation/screens/workout_screen/large_arms.dart';
 export 'package:top_gym/features/user/app/exercises/presentation/widgets/profile/list_tile_item.dart';
-export 'package:top_gym/features/user/app/exercises/presentation/widgets/profile/log_out_button.dart';
+export 'package:top_gym/features/user/app/exercises/presentation/view/profile/log_out_button.dart';
 export 'package:top_gym/features/admin/auth/presentation/screens/auth_admin.dart';
 export 'package:top_gym/features/user/app/exercises/presentation/screens/workout_screen/big_shoulders.dart';
 export 'package:top_gym/features/user/app/exercises/presentation/screens/workout_screen/crossfit.dart';
@@ -84,10 +84,10 @@ export 'package:top_gym/features/user/auth/logic/cubit/create_user/create_user_c
 export 'package:top_gym/features/user/auth/logic/cubit/login_user/login_user_cubit.dart';
 export 'package:top_gym/core/config/routes/app_routes.dart';
 export 'package:top_gym/core/config/locale/app_localizations.dart';
-export 'package:top_gym/features/user/app/exercises/presentation/widgets/profile/language_check.dart';
-export 'package:top_gym/features/user/app/exercises/presentation/widgets/profile/theme_check.dart';
+export 'package:top_gym/features/user/app/exercises/presentation/view/profile/language_check.dart';
+export 'package:top_gym/features/user/app/exercises/presentation/view/profile/theme_check.dart';
 
-export 'package:top_gym/features/user/app/exercises/presentation/widgets/profile/profile_photo.dart';
+export 'package:top_gym/features/user/app/exercises/presentation/view/profile_photo_user/profile_photo.dart';
 export 'package:top_gym/features/user/app/exercises/presentation/widgets/edit_profile/text_form_modify_profile.dart';
 
 export 'package:top_gym/features/user/auth/presentation/widgets/create_account_button.dart';
@@ -97,9 +97,13 @@ export 'package:top_gym/core/helper/my_cache_keys.dart';
 export 'package:top_gym/features/user/core/gools_data.dart';
 export 'package:fluttertoast/fluttertoast.dart';
 
+export 'package:cached_network_image/cached_network_image.dart';
+
+export 'package:top_gym/app/welcome_view/widgets/show_model_bottom_sheet.dart';
+export 'package:top_gym/features/user/app/exercises/presentation/view/profile_photo_user/photo.dart';
 
 
-
+export 'package:top_gym/features/user/app/exercises/presentation/view/profile_photo_user/button_change_photo.dart';
 
 
 

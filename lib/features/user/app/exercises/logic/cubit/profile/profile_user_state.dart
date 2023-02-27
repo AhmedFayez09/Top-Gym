@@ -28,6 +28,7 @@ class NextChangeTitleIndex extends ProfileUserState {}
 class UpdateDateSuccess extends ProfileUserState {}
 
 class UpdateDateError extends ProfileUserState {}
+
 class NoUpdateDateYet extends ProfileUserState {}
 
 //
@@ -36,15 +37,19 @@ class NoUpdateDateYet extends ProfileUserState {}
 // class UpdateUserDetailsErrorState extends ProfileUserState {}
 
 class GetUserLoadingStates extends ProfileUserState {}
+
 class GetUserSuccessStates extends ProfileUserState {}
+
 class GetUserErrorStates extends ProfileUserState {
   final String e;
-const  GetUserErrorStates({ required this.e});
+  const GetUserErrorStates({required this.e});
 }
-
 
 class UploadUserImageLoading extends ProfileUserState {}
 
 class UploadUserImageSuccess extends ProfileUserState {}
 
-class UploadUserImageError extends ProfileUserState {}
+class UploadUserImageError extends ProfileUserState {
+  final String msg;
+  const UploadUserImageError({required this.msg});
+}

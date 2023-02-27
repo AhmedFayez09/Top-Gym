@@ -12,7 +12,10 @@ class UserDetailsWidget extends StatelessWidget {
         return Row(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            const ProfilePhoto(),
+            const ProfilePhoto(
+              height: 10,
+              width: 22,
+            ),
             SizedBox(width: 3.w),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -22,9 +25,12 @@ class UserDetailsWidget extends StatelessWidget {
                   width: size.width * 0.40,
                   padding: EdgeInsets.only(right: 1.w),
                   child: Text(
-                    cubit.userData != null ? cubit.userData!.name : 'Loading..',
+                    cubit.userData != null
+                        ? cubit.userData!.name != ''
+                            ? cubit.userData!.name
+                            : 'Add Your Name'
+                        : 'Loading..',
                     overflow: TextOverflow.ellipsis,
-                    // cubit.userName == '' ? 'Loading...' : cubit.userName,
                     style: Theme.of(context)
                         .textTheme
                         .bodyLarge!

@@ -172,7 +172,7 @@ class ProfileUserCubit extends Cubit<ProfileUserState> {
             );
             emit(UploadUserImageSuccess());
           } catch (e) {
-            emit(UploadUserImageError());
+            emit(UploadUserImageError(msg: e.toString()));
           }
         }
         break;
@@ -192,7 +192,7 @@ class ProfileUserCubit extends Cubit<ProfileUserState> {
             );
             emit(UploadUserImageSuccess());
           } catch (e) {
-            emit(UploadUserImageError());
+            emit(UploadUserImageError(msg: e.toString()));
           }
           break;
         }
