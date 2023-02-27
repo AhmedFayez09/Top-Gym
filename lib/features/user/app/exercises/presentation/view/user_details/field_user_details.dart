@@ -1,19 +1,20 @@
 import '../../../../../../../core/config/routes/app.dart';
 
+// ignore: must_be_immutable
 class FieldUserDetails extends StatelessWidget {
   FieldUserDetails({Key? key}) : super(key: key);
 
-  String? phone;
-  String? name;
-  String? imageUrl;
-  String? email;
-  String? age;
-  String? country;
-  String? zipCode;
-  String? height;
-  String? weight;
-  String? male;
-  String? feMale;
+  String? phone,
+      name,
+      imageUrl,
+      email,
+      age,
+      country,
+      zipCode,
+      height,
+      weight,
+      male,
+      feMale;
 
   @override
   Widget build(BuildContext context) {
@@ -34,6 +35,7 @@ class FieldUserDetails extends StatelessWidget {
       builder: (context, state) {
         final userData = ProfileUserCubit.get(context).userData;
         ProfileUserCubit cubit = ProfileUserCubit.get(context);
+        
         return Expanded(
           child: SingleChildScrollView(
             child: Column(
@@ -53,7 +55,8 @@ class FieldUserDetails extends StatelessWidget {
                 ),
                 TextFormModifyProfile(
                   title: 'E-mail',
-                  initialValue: userData != null ? userData.email : 'Loading...',
+                  initialValue:
+                      userData != null ? userData.email : 'Loading...',
                   onChanged: (emailValue) {
                     email = emailValue;
                   },
@@ -157,9 +160,8 @@ class FieldUserDetails extends StatelessWidget {
                     Expanded(
                       child: TextFormModifyProfile(
                         title: 'Gender',
-                       initialValue:
-                            userData != null ? 
-                            userData.gender : 'Loading...',
+                        initialValue:
+                            userData != null ? userData.gender : 'Loading...',
                         onChanged: (maleValue) {
                           male = maleValue;
                         },

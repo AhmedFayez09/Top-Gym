@@ -13,6 +13,7 @@ class Photo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ProfileUserCubit, ProfileUserState>(
+      buildWhen: (previous, current) => previous != current,
       builder: (context, state) {
         ProfileUserCubit cubit = ProfileUserCubit.get(context);
         String imageUser = cubit.userData!.imageUrl;
